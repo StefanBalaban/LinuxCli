@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace LinuxCli
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            string command = "mkdir $HOME/newDir";
-            string result = "";
-            using (System.Diagnostics.Process proc = new System.Diagnostics.Process())
+            var command = "uhubctl -l 2 -a 0";
+            var result = "";
+            using (var proc = new Process())
             {
                 proc.StartInfo.FileName = "/bin/bash";
                 proc.StartInfo.Arguments = "-c \" " + command + " \"";
@@ -23,7 +24,7 @@ namespace LinuxCli
                 proc.WaitForExit();
             }
 
-            Console.WriteLine(result);
+            Console.WriteLine("USB Hub is on");
         }
     }
 }
